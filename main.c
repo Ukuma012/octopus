@@ -3,18 +3,18 @@
 #include "utils.h"
 
 int main(int argc, char* argv[]) {
-    InputBuffer* buffer = new_buffer();
+    InputBuffer* input = new_buffer();
 
     while(1) {
         prompt();
-        read_cmd(buffer);
+        read_cmd(input);
 
-        if(strcmp(buffer->buffer, "exit") == 0) {
+        if(strcmp(input->buffer, "exit") == 0) {
             printf("%s\n", "Bye");
             break;
         }
         
-        printf("%s\n", buffer->buffer);
+        printf("%s\n", input->buffer);
     }
 
     return 0;

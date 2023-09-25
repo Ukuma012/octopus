@@ -6,7 +6,7 @@
 
 /**
  * Common Page Header Layout
-*/
+ */
 const uint32_t PAGE_TYPE_SIZE = sizeof(uint8_t);
 const uint32_t PAGE_TYPE_OFFSET = 0;
 const uint32_t IS_ROOT_SIZE = sizeof(uint8_t);
@@ -17,7 +17,7 @@ const uint8_t COMMON_PAGE_HEADER_SIZE = PAGE_TYPE_SIZE + IS_ROOT_SIZE + PARENT_P
 
 /**
  * Leaf Page Header Layout
-*/
+ */
 const uint32_t LEAF_PAGE_NUM_CELLS_SIZE = sizeof(uint32_t);
 const uint32_t LEAF_PAGE_NUM_CELLS_OFFSET = COMMON_PAGE_HEADER_SIZE;
 const uint32_t LEAF_PAGE_NEXT_LEAF_SIZE = sizeof(uint32_t);
@@ -26,19 +26,40 @@ const uint32_t LEAF_PAGE_HEADER_SIZE = COMMON_PAGE_HEADER_SIZE + LEAF_PAGE_NUM_C
 
 /**
  * Leaf Page Body Layout
-*/
+ */
 
- uint32_t LEAF_PAGE_KEY_SIZE = sizeof(uint32_t);
- uint32_t LEAF_PAGE_KEY_OFFSET = 0;
- uint32_t LEAF_PAGE_VALUE_SIZE = 0;
- uint32_t LEAF_PAGE_VALUE_OFFSET = 0;
- uint32_t LEAF_PAGE_CELL_SIZE = 0;
- uint32_t LEAF_PAGE_SPACE_FOR_CELLS = 0;
- uint32_t LEAF_PAGE_MAX_CELLS = 0;
+uint32_t LEAF_PAGE_KEY_SIZE = sizeof(uint32_t);
+uint32_t LEAF_PAGE_KEY_OFFSET = 0;
+uint32_t LEAF_PAGE_VALUE_SIZE = 0;
+uint32_t LEAF_PAGE_VALUE_OFFSET = 0;
+uint32_t LEAF_PAGE_CELL_SIZE = 0;
+uint32_t LEAF_PAGE_SPACE_FOR_CELLS = 0;
+uint32_t LEAF_PAGE_MAX_CELLS = 0;
 
- void leaf_page_init(uint32_t row_size) {
+void leaf_page_init(uint32_t row_size)
+{
     LEAF_PAGE_VALUE_SIZE = row_size;
     LEAF_PAGE_CELL_SIZE = LEAF_PAGE_KEY_SIZE + LEAF_PAGE_VALUE_SIZE;
     LEAF_PAGE_SPACE_FOR_CELLS = PAGE_SIZE - LEAF_PAGE_HEADER_SIZE;
     LEAF_PAGE_MAX_CELLS = LEAF_PAGE_SPACE_FOR_CELLS / LEAF_PAGE_CELL_SIZE;
- }
+}
+
+/* Leaf Page ends here*/
+/* ----------------------------------------------------------------------------------------------------------------*/
+/* Internal Page starts here*/
+
+/**
+ * Internal Page Header Layout
+ */
+const uint32_t INTERNAL_PAGE_NUM_KEYS_SIZE = sizeof(uint32_t);
+const uint32_t INTERNAL_PAGE_NUM_KEYS_OFFSET = COMMON_PAGE_HEADER_SIZE;
+const uint32_t INTERNAL_PAGE_RIGHT_CHILD_SIZE = sizeof(uint32_t);
+const uint32_t INTERNAL_PAGE_RIGHT_CHILD_OFFSET = INTERNAL_PAGE_NUM_KEYS_OFFSET + INTERNAL_PAGE_NUM_KEYS_SIZE;
+const uint32_t INTERNAL_PAGE_HEADER_SIZE = COMMON_PAGE_HEADER_SIZE + INTERNAL_PAGE_NUM_KEYS_SIZE + INTERNAL_PAGE_RIGHT_CHILD_SIZE;
+
+/**
+ * Internal Page Body Layout
+ */
+const uint32_t INTERNAL_PAGE_CHILD_SIZE = sizeof(uint32_t);
+const uint32_t INTERNAL_PAGE_KEY_SIZE = sizeof(uint32_t);
+const uint32_t INTERNAL_PAGE_CELL_SIZE = INTERNAL_PAGE_CHILD_SIZE + INTERNAL_PAGE_KEY_SIZE;

@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdint.h>
 #include "utils.h"
+#include "page.h"
 
 const uint32_t ROW_SIZE = 293;
 
@@ -17,6 +18,7 @@ int main(int argc, char* argv[]) {
             break;
         }
         
+        leaf_page_init(ROW_SIZE);
         printf("%s\n", input->buffer);
     }
 

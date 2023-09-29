@@ -3,11 +3,13 @@
 #include <stdint.h>
 #include "utils.h"
 #include "page.h"
+#include "table.h"
 
-const uint32_t ROW_SIZE = 293;
 
 int main(int argc, char* argv[]) {
     InputBuffer* input = new_buffer();
+
+    uint32_t ROW_SIZE =  get_row_size();
 
     while(1) {
         prompt();

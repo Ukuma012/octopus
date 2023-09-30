@@ -2,8 +2,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "page.h"
-
-#define PAGE_SIZE 4096
+#include "common.h"
 
 /**
  * Common Page Header Layout

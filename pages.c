@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include "page.h"
+#include "pages.h"
 #include "common.h"
 
 /**

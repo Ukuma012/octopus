@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -O2
 
-SRCS = main.c utils.c page.c table.c disk.c
+SRCS = main.c utils.c page.c table.c pager.c
 OBJS = $(SRCS:.c=.o)
 TARGET = main
 

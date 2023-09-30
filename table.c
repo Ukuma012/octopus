@@ -1,5 +1,7 @@
+#include <stdio.h>
 #include <stdint.h>
 #include <string.h>
+#include <stdlib.h>
 #include "table.h"
 
 const uint32_t ID_SIZE = size_of_attribute(Row, id);
@@ -24,4 +26,24 @@ void deserialize_row(void* source, Row* dest) {
     memcpy(&(dest->id), source + ID_OFFSET, ID_SIZE);
     memcpy(&(dest->username), source + USERNAME_OFFSET, USERNAME_SIZE);
     memcpy(&(dest->email), source + EMAIL_OFFSET, EMAIL_SIZE);
+}
+
+Table* db_open(const char* filename) {
+    Pager* pager = pager_open(filename);
+
+    Table* table;
+    if((table = malloc(sizeof(Table))) == NULL) {
+        fprintf(stderr, "malloc failed in db_open\n");
+        exit(1);
+    }
+
+    table->pager = pager;
+    table->root_page_num = 0;
+
+    if(pager->num_of_pages == 0) {
+        // New Database file
+        printf("%s\n", "need to initialize new database");
+    }
+
+    return table;
 }
